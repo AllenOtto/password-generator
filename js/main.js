@@ -18,9 +18,14 @@ btn.addEventListener('click', () => {
 
 // Copy to clipboard implementation
 copy.addEventListener('click', () => {
-    navigator.clipboard.writeText(input.value).then(() => {
-        notification("Password is Copied");
-    });
+    const inputValue = input.value;
+    if(!inputValue) {
+        notification("Generate Password");
+    } else {
+        navigator.clipboard.writeText(input.value).then(() => {
+            notification("Password is Copied");
+        });
+    }
 });
 
 function notification(text) {
