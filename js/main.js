@@ -1,6 +1,7 @@
 const input = document.querySelector(".input > input"),
     btn = document.querySelector(".btn"),
-    copy = document.querySelector(".copy");
+    copy = document.querySelector(".copy"),
+    pwdLength = document.querySelector("[data-pwd-length]");
 
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
@@ -8,7 +9,7 @@ let passwordKeys = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz123456789-
 
 btn.addEventListener('click', () => {
     let password = "";
-    let passwordLength = 12;
+    let passwordLength = pwdLength.value;
     for(let i = 0; i < passwordLength; i++) {
         password += passwordKeys.charAt(Math.floor(Math.random() * passwordKeys.length));
     }
