@@ -3,7 +3,8 @@ const input = document.querySelector(".input > input"),
     copy = document.querySelector(".copy");
 
 // Password string
-let passwordKeys = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-=[]';/.,!@#$%^&*()|{}";
+// Excluded zero's and letter O's from string for their ease of confusion
+let passwordKeys = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz123456789-=[]';/.,!@#$%^&*()|{}";
 
 btn.addEventListener('click', () => {
     let password = "";
@@ -13,4 +14,11 @@ btn.addEventListener('click', () => {
     }
 
     input.value = password;
+});
+
+// Copy to clipboard implementation
+copy.addEventListener('click', () => {
+    navigator.clipboard.writeText(input.value).then(() => {
+        alert("Text is copied");
+    });
 });
