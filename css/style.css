@@ -23,7 +23,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
     position: relative;
+}
+
+.pass-length {
+    background-color: var(--single-bg);
+    text-align: center;
+    padding: .8rem;
+    width: 8rem;
+    border-radius: 1.5rem;
+    color: white;
 }
 
 .container .items {
@@ -44,13 +54,12 @@
 }
 
 .input input {
-    /* border: 1px solid black; */
     width: 100%;
     background-color: transparent;
-    color: white;
     padding: 0.5rem;
     border: none;
     outline: none;
+    color: #fff;
 }
 
 input::placeholder {
