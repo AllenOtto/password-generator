@@ -19,6 +19,22 @@ btn.addEventListener('click', () => {
 // Copy to clipboard implementation
 copy.addEventListener('click', () => {
     navigator.clipboard.writeText(input.value).then(() => {
-        alert("Text is copied");
+        notification("Password is Copied");
     });
 });
+
+function notification(text) {
+    const notify = document.querySelector(".container .notify");
+    const div = document.createElement('div');
+    div.className = 'alert';
+    div.innerHTML = `
+    <p>${text}</p>
+    `;
+    
+    notify.appendChild(div);
+
+    // Remove "Password is Copied" notification from UI after 2 secs
+    setTimeout(() => {
+        div.remove();
+    }, 2000);
+}

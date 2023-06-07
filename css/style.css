@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .container .items {
@@ -82,4 +83,19 @@ input::placeholder {
 
 .btn:hover {
     background-color: var(--hover);
+}
+
+.alert {
+    background-color: var(--single-bg);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    margin-bottom: .5rem; 
+}
+
+.container .notify {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
 }
