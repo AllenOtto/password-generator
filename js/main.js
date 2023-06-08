@@ -44,3 +44,11 @@ function notification(text) {
         div.remove();
     }, 2000);
 }
+
+let ideas = `
+    when you click on the copy button, the notification will pop up telling you that the password has been copied and disappear after
+    two seconds. On the third second, a pop up should appear and ask you 'Save password to Manager?' If you want it saved, click yes and 
+    no otherwise. If you click yes, the notification will ask you to enter the site the password should be saved for. Enter this answer
+    in an input field and this info will be saved in local storage as a key and value pair and the info also populated on the UI with the
+    password displayed as asterics. You could then implement an eye icon that shows you the password on click.
+`

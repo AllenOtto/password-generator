@@ -25,15 +25,19 @@
     justify-content: center;
     gap: 1rem;
     position: relative;
+    border: 1px solid black;
 }
 
 .pass-length {
     background-color: var(--single-bg);
     text-align: center;
-    padding: .8rem;
+    padding: 1rem;
     width: 8rem;
     border-radius: 1.5rem;
     color: white;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .container .items {
