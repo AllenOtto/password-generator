@@ -1,7 +1,10 @@
 const input = document.querySelector(".input > input"),
     btn = document.querySelector(".btn"),
     copy = document.querySelector(".copy"),
-    pwdLength = document.querySelector("[data-pwd-length]");
+    pwdLength = document.querySelector("[data-pwd-length]"),
+    form = document.querySelector("[data-form]"),
+    clientName = document.querySelector("[data-client-input]"),
+    clientPassword = document.querySelector("[data-pwd-input]");
 
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
@@ -45,13 +48,57 @@ function notification(text) {
     }, 2000);
 }
 
-class Password {
-    constructor(id, client, password) { //'client' is the site the password is for
-        this.id = id;
-        this.client = client;
-        this.password = password;
+form.addEventListener("submit", (e) => {
+    e.preventDefault(); // prevent page refresh
+    let id = Math.random() * 1000000;
+    const cPassword = new Creds(id, clientName.value, clientPassword.value);
+
+    console.log(cPassword);
+});
+
+class Creds {
+    constructor(passId, clientName, clientPassword) { //'client' is the site the password is for
+        this.id = passId;
+        this.client = clientName;
+        this.password = clientPassword;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let ideas = `
     when you click on the copy button, the notification will pop up telling you that the password has been copied and disappear after
