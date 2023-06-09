@@ -6,6 +6,9 @@ const input = document.querySelector(".input > input"),
     clientName = document.querySelector("[data-client-input]"),
     clientPassword = document.querySelector("[data-pwd-input]");
 
+// Array of cred objects
+let credsList = [];
+
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
 let passwordKeys = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz123456789-=[]';/.,!@#$%^&*()|{}";
@@ -51,16 +54,31 @@ function notification(text) {
 form.addEventListener("submit", (e) => {
     e.preventDefault(); // prevent page refresh
     let id = Math.random() * 1000000;
-    const cPassword = new Creds(id, clientName.value, clientPassword.value);
-
-    console.log(cPassword);
+    let cred = new Credential(id, clientName.value, clientPassword.value);
+    // Add credential to credsList array
+    credsList = [...credsList, cred];
+    Storage.addToLocalStorage(credsList);
+    let myCred = Storage.getFromLocalStorage("cred");
+    console.log(myCred);
 });
 
-class Creds {
+class Credential {
     constructor(passId, clientName, clientPassword) { //'client' is the site the password is for
         this.id = passId;
         this.client = clientName;
         this.password = clientPassword;
+    }
+}
+
+class Storage {
+    static addToLocalStorage(credsList) {
+        let storage = localStorage.setItem("cred", JSON.stringify(credsList));
+        return storage;
+    }
+
+    static getFromLocalStorage() {
+        let storage = localStorage.getItem("cred") === null ? [] : JSON.parse(localStorage.getItem("cred"));
+        return storage;
     }
 }
 
@@ -92,9 +110,7 @@ class Creds {
 
 
 
-
-
-
+let drafts = `Search Class, Storage Class, UI Class`;
 
 
 
