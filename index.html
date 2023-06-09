@@ -12,15 +12,28 @@
 <body>
     <div class="container">
         <div class="items">
+            <h1>Password Generator</h1>
             <div class="input">
                 <input type="text" placeholder="Your Password..." readonly>
                 <span class="copy" title="copy"><i class="fa-sharp fa-solid fa-copy"></i></span>
             </div>
             <button class="btn">Generate Password</button>
+            <hr>
+            <div class="pwd-manager">
+                <div class="form-container">
+                    <form class="form" data-form>
+                        <lebel class="pwd-manager-subtitle">What site is the password for?</lebel>
+                        <input type="text" placeholder="Enter site name here..." data-client-input>
+                        <lebel class="pwd-manager-subtitle">What password have you settled on?</lebel>
+                        <input type="text" placeholder="Paste selected password here..." data-pwd-input>
+                        <button class="btn2">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="notify"></div>
         <div class="pass-length">
-            <lebel for="length">Pwd Length </lebel>
+            <lebel for="length">Choose<br> pwd Length </lebel>
             <select id="length" data-pwd-length>
                 <option value="8">8</option>
                 <option value="12">12</option>
@@ -28,7 +41,6 @@
                 <option value="20">20</option>
             </select>
         </div>
-        <div class="pwd-manager"></div>
     </div>
 </body>
 </html>

@@ -45,6 +45,14 @@ function notification(text) {
     }, 2000);
 }
 
+class Password {
+    constructor(id, client, password) { //'client' is the site the password is for
+        this.id = id;
+        this.client = client;
+        this.password = password;
+    }
+}
+
 let ideas = `
     when you click on the copy button, the notification will pop up telling you that the password has been copied and disappear after
     two seconds. On the third second, a pop up should appear and ask you 'Save password to Manager?' If you want it saved, click yes and 
