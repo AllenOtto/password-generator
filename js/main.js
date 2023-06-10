@@ -13,10 +13,14 @@ const input = document.querySelector(".input > input"),
 class Storage {
     static addToLocalStorage(list) {
         let storage = localStorage.setItem("cred", JSON.stringify(list));
+    }
+
+    static getFromLocalStorage() {
+        let storage = (!localStorage.getItem('cred')) ? [] : JSON.parse(localStorage.getItem("cred"));
         return storage;
     }
 
-    static getFromLocalStorage(searchQuery) {
+    static search(searchQuery) {
         let res;
         searchQuery = searchQuery.toLowerCase();
         if(localStorage.getItem("cred")) {
@@ -24,7 +28,7 @@ class Storage {
 
             storage.forEach((cred) => {
                 if(cred.client === searchQuery) {
-                    res = cred.password; // Assuming just one instance of the search query exists
+                    res = cred.password; // Assuming just one instance of the search query exists in storage
                 }
             });
 
@@ -37,7 +41,7 @@ class Storage {
 }
 
 // Array of cred objects
-let credsList = [];
+let credsList = Storage.getFromLocalStorage();
 
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
@@ -70,7 +74,7 @@ function notification(text) {
     const div = document.createElement('div');
     div.className = 'alert';
     div.innerHTML = `
-    <p>${text}</p>
+        <p>${text}</p>
     `;
     
     notify.appendChild(div);
@@ -88,7 +92,7 @@ formPost.addEventListener("submit", (e) => {
     // Convert primaryId to lowerCase
     clientName = clientNameInput.value.toLowerCase();
     // Create instance of Credential class
-    let cred = new Credential(id, clientName, clientPassword.value);
+    const cred = new Credential(id, clientName, clientPassword.value);
     credsList = [...credsList, cred];
     Storage.addToLocalStorage(credsList);
     notification("Credentials saved successfully");
@@ -105,14 +109,14 @@ class Credential {
 searchBtn.addEventListener('click', () => {
     if(dataSearch.value) {
         let query = dataSearch.value;
-        let response = Storage.getFromLocalStorage(query);
+        let response = Storage.search(query);
         console.log(response);
 
         // Display password
         let inputDisplay = document.createElement('input');
         inputDisplay.value = response;
         displayPassDiv.appendChild(inputDisplay);
-        notification("You have 8 seconds...");
+        notification("Copy password now!");
 
         setTimeout(() => {
             inputDisplay.remove();
@@ -143,11 +147,8 @@ searchBtn.addEventListener('click', () => {
 
 
 
-let issue = `creds overwrite in localstorage rather than get pushed. Issue may be in credsList`
 
-
-
-let drafts = `Search Class, Storage Class, UI Class`;
+let drafts = `Search Class, Storage Class, UI Class. It would be better to have a way to know what sites' passwords I have in my manager`;
 
 
 
