@@ -2,9 +2,11 @@ const input = document.querySelector(".input > input"),
     btn = document.querySelector(".btn"),
     copy = document.querySelector(".copy"),
     pwdLength = document.querySelector("[data-pwd-length]"),
-    form = document.querySelector("[data-form]"),
-    clientName = document.querySelector("[data-client-input]"),
-    clientPassword = document.querySelector("[data-pwd-input]");
+    formPost = document.querySelector("[data-form]"),
+    clientNameInput = document.querySelector("[data-client-input]"),
+    clientPassword = document.querySelector("[data-pwd-input]"),
+    dataSearch = document.querySelector("[data-search]"),
+    searchBtn = document.querySelector(".search-btn");
 
 // Class Declaration for Storage
 class Storage {
@@ -13,14 +15,28 @@ class Storage {
         return storage;
     }
 
-    static getFromLocalStorage() {
-        let storage = localStorage.getItem("cred") === null ? [] : JSON.parse(localStorage.getItem("cred"));
-        return storage;
+    static getFromLocalStorage(searchQuery) {
+        let res;
+        searchQuery = searchQuery.toLowerCase();
+        if(localStorage.getItem("cred") !== null) {
+            let storage = JSON.parse(localStorage.getItem("cred"));
+
+            storage.forEach((cred) => {
+                if(cred.client === searchQuery) {
+                    res = cred.password; // Assuming just one instance of the search query exists
+                }
+            });
+
+        } else {
+            res = "Match not found";
+        }
+
+        return res;
     }
 }
 
 // Array of cred objects
-let credsList = Storage.getFromLocalStorage("cred");
+let credsList = [];
 
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
@@ -64,16 +80,16 @@ function notification(text) {
     }, 2000);
 }
 
-form.addEventListener("submit", (e) => {
+formPost.addEventListener("submit", (e) => {
     e.preventDefault(); // prevent page refresh
     // Create a unique id for instance of Credential class
     let id = Math.random() * 1000000;
+    // Convert primaryId to lowerCase
+    clientName = clientNameInput.value.toLowerCase();
     // Create instance of Credential class
-    let cred = new Credential(id, clientName.value, clientPassword.value);
+    let cred = new Credential(id, clientName, clientPassword.value);
     credsList = [...credsList, cred];
     Storage.addToLocalStorage(credsList);
-    let myCred = Storage.getFromLocalStorage("cred");
-    console.log(myCred);
 });
 
 class Credential {
@@ -84,7 +100,13 @@ class Credential {
     }
 }
 
-
+searchBtn.addEventListener('click', () => {
+    if(dataSearch.value !== " ") {
+        let query = dataSearch.value;
+        let response = Storage.getFromLocalStorage(query);
+        console.log(response);
+    }
+});
 
 
 

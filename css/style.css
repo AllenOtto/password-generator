@@ -22,7 +22,7 @@ body {
 }
 
 hr {
-    margin: 1.5rem;
+    margin: 1rem;
 }
 
 .container {
@@ -38,12 +38,16 @@ hr {
     background-color: var(--single-bg);
     text-align: center;
     padding: 1rem;
-    width: 8rem;
+    width: auto;
     border-radius: 1.5rem;
     color: white;
     display: flex;
     flex-direction: column;
     gap: .5rem;
+}
+
+.pass-length select {
+    background-color: aliceblue;
 }
 
 .container .items {
@@ -154,3 +158,24 @@ input::placeholder {
     border: none;
     
  }
+
+ .form-container p {
+    font-size: .8rem;
+ }
+
+.search {
+    width: 15rem;
+    color: aliceblue;
+    text-align: center;
+}
+
+.search input {
+    background-color: aliceblue;
+    border-radius: 5px;
+    padding: .3rem;
+    margin-top: 1rem;
+}
+
+.search .btn3 {
+    padding: .3rem;
+}
