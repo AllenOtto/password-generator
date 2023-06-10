@@ -6,8 +6,21 @@ const input = document.querySelector(".input > input"),
     clientName = document.querySelector("[data-client-input]"),
     clientPassword = document.querySelector("[data-pwd-input]");
 
+// Class Declaration for Storage
+class Storage {
+    static addToLocalStorage(list) {
+        let storage = localStorage.setItem("cred", JSON.stringify(list));
+        return storage;
+    }
+
+    static getFromLocalStorage() {
+        let storage = localStorage.getItem("cred") === null ? [] : JSON.parse(localStorage.getItem("cred"));
+        return storage;
+    }
+}
+
 // Array of cred objects
-let credsList = [];
+let credsList = Storage.getFromLocalStorage("cred");
 
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
@@ -53,9 +66,10 @@ function notification(text) {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault(); // prevent page refresh
+    // Create a unique id for instance of Credential class
     let id = Math.random() * 1000000;
+    // Create instance of Credential class
     let cred = new Credential(id, clientName.value, clientPassword.value);
-    // Add credential to credsList array
     credsList = [...credsList, cred];
     Storage.addToLocalStorage(credsList);
     let myCred = Storage.getFromLocalStorage("cred");
@@ -70,17 +84,6 @@ class Credential {
     }
 }
 
-class Storage {
-    static addToLocalStorage(credsList) {
-        let storage = localStorage.setItem("cred", JSON.stringify(credsList));
-        return storage;
-    }
-
-    static getFromLocalStorage() {
-        let storage = localStorage.getItem("cred") === null ? [] : JSON.parse(localStorage.getItem("cred"));
-        return storage;
-    }
-}
 
 
 
@@ -106,7 +109,7 @@ class Storage {
 
 
 
-
+let issue = `creds overwrite in localstorage rather than get pushed. Issue may be in credsList`
 
 
 
