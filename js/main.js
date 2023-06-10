@@ -19,7 +19,7 @@ class Storage {
     static getFromLocalStorage(searchQuery) {
         let res;
         searchQuery = searchQuery.toLowerCase();
-        if(!localStorage.getItem("cred")) {
+        if(localStorage.getItem("cred")) {
             let storage = JSON.parse(localStorage.getItem("cred"));
 
             storage.forEach((cred) => {
@@ -91,6 +91,7 @@ formPost.addEventListener("submit", (e) => {
     let cred = new Credential(id, clientName, clientPassword.value);
     credsList = [...credsList, cred];
     Storage.addToLocalStorage(credsList);
+    notification("Credentials saved successfully");
 });
 
 class Credential {
@@ -111,6 +112,11 @@ searchBtn.addEventListener('click', () => {
         let inputDisplay = document.createElement('input');
         inputDisplay.value = response;
         displayPassDiv.appendChild(inputDisplay);
+        notification("You have 8 seconds...");
+
+        setTimeout(() => {
+            inputDisplay.remove();
+        }, 8000);
     }
 });
 
