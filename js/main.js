@@ -6,7 +6,8 @@ const input = document.querySelector(".input > input"),
     clientNameInput = document.querySelector("[data-client-input]"),
     clientPassword = document.querySelector("[data-pwd-input]"),
     dataSearch = document.querySelector("[data-search]"),
-    searchBtn = document.querySelector(".search-btn");
+    searchBtn = document.querySelector(".search-btn"),
+    displayPassDiv = document.querySelector(".display-password");
 
 // Class Declaration for Storage
 class Storage {
@@ -18,7 +19,7 @@ class Storage {
     static getFromLocalStorage(searchQuery) {
         let res;
         searchQuery = searchQuery.toLowerCase();
-        if(localStorage.getItem("cred") !== null) {
+        if(!localStorage.getItem("cred")) {
             let storage = JSON.parse(localStorage.getItem("cred"));
 
             storage.forEach((cred) => {
@@ -28,7 +29,7 @@ class Storage {
             });
 
         } else {
-            res = "Match not found";
+            res = `Match not found`;
         }
 
         return res;
@@ -101,10 +102,15 @@ class Credential {
 }
 
 searchBtn.addEventListener('click', () => {
-    if(dataSearch.value !== " ") {
+    if(dataSearch.value) {
         let query = dataSearch.value;
         let response = Storage.getFromLocalStorage(query);
         console.log(response);
+
+        // Display password
+        let inputDisplay = document.createElement('input');
+        inputDisplay.value = response;
+        displayPassDiv.appendChild(inputDisplay);
     }
 });
 
