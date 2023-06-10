@@ -41,7 +41,7 @@ class Storage {
 }
 
 // Array of cred objects
-let credsList = Storage.getFromLocalStorage();
+let credsList = Storage.getFromLocalStorage("cred");
 
 // Password string
 // Excluded zero's and letter O's from string for their ease of confusion
@@ -116,7 +116,7 @@ searchBtn.addEventListener('click', () => {
         let inputDisplay = document.createElement('input');
         inputDisplay.value = response;
         displayPassDiv.appendChild(inputDisplay);
-        notification("Copy password now!");
+        notification("Copy Password!");
 
         setTimeout(() => {
             inputDisplay.remove();
